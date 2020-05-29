@@ -123,3 +123,43 @@ stages:
                       
 
                       Write-Host "Deploy in Development" 
+  - stage: DeployQA
+
+    displayName: 'Deploy QA' 
+    jobs: 
+
+      - deployment: Deploy 
+
+        displayName: 'Deploy QA' 
+
+        pool: 
+
+          vmImage: 'windows-latest' 
+
+  
+
+        environment: 'QA' 
+          
+        strategy: 
+
+            runOnce: 
+
+              deploy: 
+
+                steps: 
+
+                - download: none 
+
+                - task: PowerShell@2 
+
+                  inputs: 
+
+                    targetType: 'inline' 
+
+                    script: | 
+
+                      # Write your PowerShell commands here. 
+
+                      
+
+                      Write-Host "Deploy in QA" 
