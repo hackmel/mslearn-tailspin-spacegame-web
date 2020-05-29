@@ -98,8 +98,9 @@ stages:
 
   
 
-          environment: 'Development' 
-          strategy: 
+        environment: 'Development' 
+          
+        strategy: 
 
             runOnce: 
 
