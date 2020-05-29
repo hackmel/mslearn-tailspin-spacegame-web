@@ -1,0 +1,71 @@
+{ 
+
+ 
+
+ 
+
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#", 
+
+ 
+
+    "contentVersion": "1.0.0.0", 
+
+ 
+
+    "parameters": {  
+
+ 
+
+        "webAppName":{ 
+
+ 
+
+            "value": "webapp-tailspin-{your initials}-dev" 
+
+ 
+
+        }, 
+
+ 
+
+        "servicePlanName": {    
+
+ 
+
+            "value": "splan-tailspin-{your initials}-dev" 
+
+ 
+
+        }, 
+
+ 
+
+        "appInsightsName": { 
+
+ 
+
+            "value": "insights-tailspin-{your initials}-dev" 
+
+ 
+
+        }, 
+
+ 
+
+        "location": { 
+
+ 
+
+            "value": "australiaeast" 
+
+ 
+
+        } 
+
+ 
+
+    } 
+
+ 
+
+} 
