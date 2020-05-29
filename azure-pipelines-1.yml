@@ -107,22 +107,60 @@ stages:
               deploy: 
 
                 steps: 
+                - checkout: self 
 
-                - download: none 
+                - task: AzureResourceManagerTemplateDeployment@3 
 
-                - task: PowerShell@2 
+                  displayName: 'Deploy Infrastructure' 
 
                   inputs: 
 
-                    targetType: 'inline' 
+                    deploymentScope: 'Resource Group' 
 
-                    script: | 
+                    azureResourceManagerConnection: 'DevOpsDayConnectionService' 
 
-                      # Write your PowerShell commands here. 
+                    subscriptionId: '9a351677-dd5f-4242-ac24-ca47976bf412' 
 
-                      
+                    action: 'Create Or Update Resource Group' 
 
-                      Write-Host "Deploy in Development" 
+                    resourceGroupName: 'DevOpsDay' 
+
+                    location: 'Australia East' 
+
+                    templateLocation: 'Linked artifact' 
+
+                    csmFile: '$(Build.SourcesDirectory)/ARMTemplates/azuredeploy.json' 
+
+                    csmParametersFile: '$(Build.SourcesDirectory)/ ARMTemplates/azuredeploy.parameters.dev.json' 
+
+                    deploymentMode: 'Incremental' 
+
+                - task: DownloadPipelineArtifact@2 
+
+                  displayName: 'Download Build Artifacts' 
+
+                  inputs: 
+
+                    buildType: 'current' 
+
+                    itemPattern:  
+
+                    targetPath: '$(Build.ArtifactStagingDirectory)' 
+                - task: AzureRmWebAppDeployment@4 
+
+                  inputs: 
+
+                    ConnectionType: 'AzureRM' 
+
+                    azureSubscription: 'sp-tailspin-RommelS-dev' 
+
+                    appType: 'webApp' 
+
+                    WebAppName: 'webapp-tailspin-RommelS-dev' 
+
+                    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip' 
+
+                
   - stage: DeployQA
 
     displayName: 'Deploy QA' 
@@ -148,18 +186,55 @@ stages:
 
                 steps: 
 
-                - download: none 
+                - checkout: self 
 
-                - task: PowerShell@2 
+                - task: AzureResourceManagerTemplateDeployment@3 
+
+                  displayName: 'Deploy Infrastructure' 
 
                   inputs: 
 
-                    targetType: 'inline' 
+                    deploymentScope: 'Resource Group' 
 
-                    script: | 
+                    azureResourceManagerConnection: 'DevOpsDayConnectionService' 
 
-                      # Write your PowerShell commands here. 
+                    subscriptionId: '9a351677-dd5f-4242-ac24-ca47976bf412' 
 
-                      
+                    action: 'Create Or Update Resource Group' 
 
-                      Write-Host "Deploy in QA" 
+                    resourceGroupName: 'DevOpsDay' 
+
+                    location: 'Australia East' 
+
+                    templateLocation: 'Linked artifact' 
+
+                    csmFile: '$(Build.SourcesDirectory)/ARMTemplates/azuredeploy.json' 
+
+                    csmParametersFile: '$(Build.SourcesDirectory)/ ARMTemplates/azuredeploy.parameters.dev.json' 
+
+                    deploymentMode: 'Incremental' 
+
+                - task: DownloadPipelineArtifact@2 
+
+                  displayName: 'Download Build Artifacts' 
+
+                  inputs: 
+
+                    buildType: 'current' 
+
+                    itemPattern:  
+
+                    targetPath: '$(Build.ArtifactStagingDirectory)' 
+                - task: AzureRmWebAppDeployment@4 
+
+                  inputs: 
+
+                    ConnectionType: 'AzureRM' 
+
+                    azureSubscription: 'sp-tailspin-RommelS-QA' 
+
+                    appType: 'webApp' 
+
+                    WebAppName: 'webapp-tailspin-RommelS-QA' 
+
+                    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip' 
