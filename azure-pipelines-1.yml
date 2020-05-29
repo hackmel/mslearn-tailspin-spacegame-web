@@ -117,7 +117,7 @@ stages:
 
                     deploymentScope: 'Resource Group' 
 
-                    azureResourceManagerConnection: 'DevOpsDayConnectionService' 
+                    azureResourceManagerConnection: 'DevOpsDayServiceConnectionService' 
 
                     subscriptionId: '9a351677-dd5f-4242-ac24-ca47976bf412' 
 
@@ -196,7 +196,7 @@ stages:
 
                     deploymentScope: 'Resource Group' 
 
-                    azureResourceManagerConnection: 'DevOpsDayConnectionService' 
+                    azureResourceManagerConnection: 'DevOpsDayServiceConnectionService' 
 
                     subscriptionId: '9a351677-dd5f-4242-ac24-ca47976bf412' 
 
