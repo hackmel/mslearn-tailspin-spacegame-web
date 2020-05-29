@@ -119,7 +119,7 @@ stages:
 
                     azureResourceManagerConnection: 'DevOpsDayServiceConnectionService' 
 
-                    subscriptionId: '9a351677-dd5f-4242-ac24-ca47976bf412' 
+                    subscriptionId: '0e45013a-4947-4c07-8008-63623120a0bd' 
 
                     action: 'Create Or Update Resource Group' 
 
@@ -198,7 +198,7 @@ stages:
 
                     azureResourceManagerConnection: 'DevOpsDayServiceConnectionService' 
 
-                    subscriptionId: '9a351677-dd5f-4242-ac24-ca47976bf412' 
+                    subscriptionId: '0e45013a-4947-4c07-8008-63623120a0bd' 
 
                     action: 'Create Or Update Resource Group' 
 
