@@ -152,7 +152,7 @@ stages:
 
                     ConnectionType: 'AzureRM' 
 
-                    azureSubscription: 'sp-tailspin-RommelS-dev' 
+                    azureSubscription: 'splan-tailspin-RommelS-dev' 
 
                     appType: 'webApp' 
 
@@ -231,7 +231,7 @@ stages:
 
                     ConnectionType: 'AzureRM' 
 
-                    azureSubscription: 'sp-tailspin-RommelS-QA' 
+                    azureSubscription: 'splan-tailspin-RommelS-QA' 
 
                     appType: 'webApp' 
 
