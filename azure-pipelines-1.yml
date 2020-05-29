@@ -7,84 +7,118 @@ trigger:
 - master
 stages: 
 
-- stage: Build 
+  - stage: Build 
 
-  displayName: 'Build' 
+    displayName: 'Build' 
 
-  jobs: 
+    jobs: 
 
-    - job: BuildDEV 
+      - job: BuildDEV 
 
-      pool: 
+        pool: 
 
-        vmImage: 'windows-latest' 
+          vmImage: 'windows-latest' 
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+        steps:
 
-  steps:
+        - task: DotNetCoreCLI@2 
 
-  - task: DotNetCoreCLI@2 
+          displayName: 'Restore Packages' 
 
-    displayName: 'Restore Packages' 
+          inputs: 
 
-    inputs: 
+            command: restore 
 
-      command: restore 
+            projects: '**/*.sln' 
 
-      projects: '**/*.sln' 
+        - task: DotNetCoreCLI@2 
 
-  - task: DotNetCoreCLI@2 
+          displayName: 'Build WebApp' 
 
-    displayName: 'Build WebApp' 
+          inputs: 
 
-    inputs: 
+            command: build 
 
-      command: build 
+            projects: '**/*.sln' 
 
-      projects: '**/*.sln' 
+            arguments: '--configuration Debug' 
 
-      arguments: '--configuration Debug' 
+            workingDirectory: '$(System.DefaultWorkingDirectory)' 
 
-      workingDirectory: '$(System.DefaultWorkingDirectory)' 
+        - task: DotNetCoreCLI@2 
 
-  - task: DotNetCoreCLI@2 
+          displayName: 'Create Package' 
 
-    displayName: 'Create Package' 
+          inputs: 
 
-    inputs: 
+            command: publish 
 
-      command: publish 
+            projects: '**/*.sln' 
 
-      projects: '**/*.sln' 
+            arguments: '--configuration Debug --output $(Build.ArtifactStagingDirectory)' 
 
-      arguments: '--configuration Debug --output $(Build.ArtifactStagingDirectory)' 
+            zipAfterPublish: true 
 
-      zipAfterPublish: true 
+            publishWebProjects: true 
 
-      publishWebProjects: true 
+        - task: PublishBuildArtifacts@1 
 
-  - task: PublishBuildArtifacts@1 
+          displayName: 'Publish Package' 
 
-    displayName: 'Publish Package' 
+          inputs: 
 
-    inputs: 
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
 
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+            ArtifactName: 'TailSpin' 
 
-      ArtifactName: 'TailSpin' 
+        - task: DotNetCoreCLI@2 
 
-  - task: DotNetCoreCLI@2 
+          displayName: 'Test Package' 
 
-    displayName: 'Test Package' 
+          inputs: 
 
-    inputs: 
+            command: test 
 
-      command: test 
+            projects: '**/*.sln' 
 
-      projects: '**/*.sln' 
+            arguments: '--configuration Debug' 
 
-      arguments: '--configuration Debug' 
+  - stage: DeployDEV 
 
+    displayName: 'Deploy Development' 
+    jobs: 
+
+      - deployment: Deploy 
+
+        displayName: 'Deploy Development' 
+
+        pool: 
+
+          vmImage: 'windows-latest' 
+
+  
+
+          environment: 'Development' 
+          strategy: 
+
+            runOnce: 
+
+              deploy: 
+
+                steps: 
+
+                - download: none 
+
+                - task: PowerShell@2 
+
+                  inputs: 
+
+                    targetType: 'inline' 
+
+                    script: | 
+
+                      # Write your PowerShell commands here. 
+
+                      
+
+                      Write-Host "Deploy in Development" 
