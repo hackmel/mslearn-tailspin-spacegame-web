@@ -131,7 +131,7 @@ stages:
 
                     csmFile: '$(Build.SourcesDirectory)/ARMTemplates/azuredeploy.json' 
 
-                    csmParametersFile: '$(Build.SourcesDirectory)/ ARMTemplates/azuredeploy.parameters.dev.json' 
+                    csmParametersFile: '$(Build.SourcesDirectory)/ARMTemplates/azuredeploy.parameters.dev.json' 
 
                     deploymentMode: 'Incremental' 
 
@@ -210,7 +210,7 @@ stages:
 
                     csmFile: '$(Build.SourcesDirectory)/ARMTemplates/azuredeploy.json' 
 
-                    csmParametersFile: '$(Build.SourcesDirectory)/ ARMTemplates/azuredeploy.parameters.dev.json' 
+                    csmParametersFile: '$(Build.SourcesDirectory)/ARMTemplates/azuredeploy.parameters.qa.json' 
 
                     deploymentMode: 'Incremental' 
 
