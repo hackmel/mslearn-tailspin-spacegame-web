@@ -117,7 +117,7 @@ stages:
 
                     deploymentScope: 'Resource Group' 
 
-                    azureResourceManagerConnection: 'DevOpsDayServiceConnectionService' 
+                    azureResourceManagerConnection: 'splan-tailspin-RommelS-dev' 
 
                     subscriptionId: '0e45013a-4947-4c07-8008-63623120a0bd' 
 
@@ -196,7 +196,7 @@ stages:
 
                     deploymentScope: 'Resource Group' 
 
-                    azureResourceManagerConnection: 'DevOpsDayServiceConnectionService' 
+                    azureResourceManagerConnection: 'splan-tailspin-RommelS-dev' 
 
                     subscriptionId: '0e45013a-4947-4c07-8008-63623120a0bd' 
 
